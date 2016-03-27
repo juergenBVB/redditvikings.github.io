@@ -1,0 +1,96 @@
+<html>
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+		<script>
+		  
+		</script>
+	</head>
+  <body>
+
+    <div id="accordion"></div>
+
+    <script type="text/javascript" src="tabletop-master/src/tabletop.js"></script>
+    <script type="text/javascript">
+      window.onload = function() { init() };
+      var public_spreadsheet_url = 'https://docs.google.com/spreadsheets/d/1LV_ilXkmiinV08KV4ukj3nusDVdDsHO_zySnlNfIwWU/pubhtml';
+      function init() {
+        Tabletop.init( { key: public_spreadsheet_url,
+                         callback: showInfo,
+                         simpleSheet: true } );
+      }
+      function showInfo(data) {
+        // data comes through as a simple array since simpleSheet is turned on	
+		var htmldata = "";
+		for (var i = data.length - 1; i >= 0; i--){
+		  //Section
+		  htmldata = htmldata + "<h3 class='category'>" + data[i]["Timestamp"] + " - " + data[i]["What is your in-game name? "] + "</h3>";
+		  
+		  //Content
+		  var currentdata = data[i];
+		  var age = currentdata["Age "];
+		  var screenshots = currentdata["Base and profile screenshot"];
+		  var groupmebool = currentdata["Do you have GroupMe and/or Skitch? "];
+		  var gender = currentdata["Gender "];
+		  var redditclan = currentdata["Have you been in a reddit clan before? If so why did you leave? "];
+		  var foundclan = currentdata["How did you find the clan? "];
+		  var warstars = currentdata["How many war stars do you have?"];
+		  var playclash = currentdata["How much do you play clash?"];
+		  var notlied = currentdata["I have not lied and have read and agree to the Viking Rules!"];
+		  var country = currentdata["What country do you live in?"];
+		  var groupmename = currentdata["What is you GroupMe username?"];
+		  var friendinneed = currentdata["What is your friend in need score?"];
+		  var redditname = currentdata["What is your reddit name?"];
+		  var timezone = currentdata["What is your time-zone?"];
+		  var archerlevel = currentdata["What level archers do you have?"];
+		  var herolevel = currentdata["What level are your heroes?"];
+		  var walllevel = currentdata["What level are your walls?"];
+		  var townhalllevel = currentdata["What townhall level are you?"];
+		  var goodviking = currentdata["What would make you a good Viking?"];
+		  var whyviking = currentdata["Why do you want to be a Viking?"];
+		  
+		  htmldata = htmldata + "<div><table class='data'>";
+		  
+		  htmldata = htmldata + "<tr><td>Age</td><td>" + age + "</td></tr>";
+		  htmldata = htmldata + "<tr><td>Gender</td><td>" + gender + "</td></tr>";
+		  htmldata = htmldata + "<tr><td>Townhall Level</td><td>" + townhalllevel + "</td></tr>";
+		  htmldata = htmldata + "<tr><td>Reddit Name</td><td>" + redditname + "</td></tr>";
+		  htmldata = htmldata + "<tr><td>Walls Level</td><td>" + walllevel + "</td></tr>";
+		  htmldata = htmldata + "<tr><td>War Stars</td><td>" + warstars + "</td></tr>";
+		  htmldata = htmldata + "<tr><td>Heroes Level</td><td>" + herolevel + "</td></tr>";
+		  htmldata = htmldata + "<tr><td>Archer Level</td><td>" + archerlevel + "</td></tr>";
+		  htmldata = htmldata + "<tr><td>Friend in Need Score</td><td>" + friendinneed + "</td></tr>";
+		  htmldata = htmldata + "<tr><td>How much do you play Clash of Clans</td><td>" + playclash + "</td></tr>";
+		  htmldata = htmldata + "<tr><td>Why do you want to be a Viking?</td><td>" + whyviking + "</td></tr>";
+		  htmldata = htmldata + "<tr><td>What would make you a good Viking?</td><td>" + goodviking + "</td></tr>";
+		  htmldata = htmldata + "<tr><td>How did you find the clan</td><td>" + foundclan + "</td></tr>";
+		  htmldata = htmldata + "<tr><td>Do you have GroupMe and/or Skitch?</td><td>" + groupmebool + "</td></tr>";
+		  htmldata = htmldata + "<tr><td>GroupMe Username</td><td>" + groupmename + "</td></tr>";
+		  htmldata = htmldata + "<tr><td>Have you been in a reddit clan before? If so why did you leave?</td><td>" + redditclan + "</td></tr>";
+		  htmldata = htmldata + "<tr><td>Base and profile Screenshots</td><td>" + screenshots + "</td></tr>";		  
+		  htmldata = htmldata + "<tr><td>Country</td><td>" + country + "</td></tr>";
+		  htmldata = htmldata + "<tr><td>Timezone</td><td>" + timezone + "</td></tr>";
+		  htmldata = htmldata + "<tr><td>I have not lied and have read the rules</td><td>" + notlied + "</td></tr>";		  
+		  htmldata = htmldata + "</table></div>";
+		  
+		}
+		document.getElementById("accordion").innerHTML = htmldata;
+
+		//setup accordion view
+			$(function() {
+			$( "#accordion" ).accordion({
+				heightStyle: "content",
+				header: '.category'
+			
+			});
+			$("td").css("padding", "5px");
+			$("tr:even").css("background-color", "#eeeeee");
+			$("tr:odd").css("background-color", "#ffffff");
+		  });		
+		
+        console.log(data);
+      }        
+    </script>
+  </body>
+</html>
